@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Авторизация | Campus Coworking</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='styles.css', v=asset_version) }}"
+        />
+    </head>
+    <body class="auth-page" data-student-id-hint="{{ student_id_hint }}">
+        <main class="auth-layout">
+            <section class="auth-visual" aria-label="Изображение коворкинга">
+                <img
+                    src="{{ auth_showcase_image }}"
+                    alt="Коворкинг"
+                    loading="lazy"
+                />
+                <div class="auth-visual-overlay">
+                    <div class="auth-brand">Campus Coworking</div>
+                    <p class="auth-quote">
+                        «Система помогает студентам быстрее находить место,
+                        бронировать и работать без лишней рутины».
+                    </p>
+                </div>
+            </section>
+
+            <section class="auth-panel-page">
+                <div class="auth-panel-head">
+                    <h1>Вход в Campus Coworking</h1>
+                    <p class="auth-subtitle">
+                        Введите email и пароль для доступа к аккаунту.
+                    </p>
+                </div>
+
+                <div
+                    class="auth-tabs"
+                    role="tablist"
+                    aria-label="Переключение формы"
+                >
+                    <button
+                        class="tab-btn active"
+                        data-target="login-form"
+                        type="button"
+                    >
+                        Вход
+                    </button>
+                    <button
+                        class="tab-btn"
+                        data-target="register-form"
+                        type="button"
+                    >
+                        Регистрация
+                    </button>
+                </div>
+
+                <form
+                    id="login-form"
+                    class="auth-form active"
+                    autocomplete="on"
+                >
+                    <label class="auth-field">
+                        <span>Email</span>
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            maxlength="120"
+                            placeholder="example@university.ru"
+                        />
+                    </label>
+                    <label class="auth-field">
+                        <span>Пароль</span>
+                        <input
+                            type="password"
+                            name="password"
+                            required
+                            minlength="8"
+                            maxlength="120"
+                            placeholder="••••••••"
+                        />
+                    </label>
+                    <div class="auth-form-meta">
+                        <label class="auth-check">
+                            <input type="checkbox" name="remember_me" />
+                            <span>Запомнить меня</span>
+                        </label>
+                        <a href="#" class="auth-link">Забыли пароль?</a>
+                    </div>
+                    <button type="submit" class="btn auth-submit">Войти</button>
+                </form>
+
+                <form
+                    id="register-form"
+                    class="auth-form auth-form-grid"
+                    autocomplete="on"
+                >
+                    <label class="auth-field">
+                        <span>Настоящее имя</span>
+                        <input
+                            type="text"
+                            name="first_name"
+                            required
+                            minlength="2"
+                            maxlength="50"
+                            placeholder="Иван"
+                        />
+                    </label>
+                    <label class="auth-field">
+                        <span>Настоящая фамилия</span>
+                        <input
+                            type="text"
+                            name="last_name"
+                            required
+                            minlength="2"
+                            maxlength="50"
+                            placeholder="Петров"
+                        />
+                    </label>
+                    <label class="auth-field">
+                        <span>Email</span>
+                        <input
+                            type="email"
+                            name="email"
+                            required
+                            maxlength="120"
+                            placeholder="example@university.ru"
+                        />
+                    </label>
+                    <label class="auth-field">
+                        <span>Никнейм</span>
+                        <input
+                            type="text"
+                            name="nickname"
+                            required
+                            minlength="3"
+                            maxlength="32"
+                            placeholder="nickname"
+                        />
+                    </label>
+                    <label class="auth-field">
+                        <span>Номер студенческого билета</span>
+                        <input
+                            type="text"
+                            name="student_id"
+                            required
+                            maxlength="9"
+                            placeholder="{{ student_id_hint }}"
+                            title="Формат: {{ student_id_hint }}"
+                            autocomplete="off"
+                        />
+                        <small class="field-hint"
+                            >Формат: {{ student_id_hint }}</small
+                        >
+                    </label>
+                    <label class="auth-field">
+                        <span>Пароль</span>
+                        <input
+                            type="password"
+                            name="password"
+                            required
+                            minlength="8"
+                            maxlength="120"
+                            placeholder="минимум 8 символов"
+                        />
+                    </label>
+                    <div class="auth-submit-row">
+                        <button type="submit" class="btn auth-submit">
+                            Создать аккаунт
+                        </button>
+                    </div>
+                </form>
+
+                <p class="auth-note">
+                    Нажимая «Войти» или «Создать аккаунт», вы принимаете условия
+                    использования и политику конфиденциальности.
+                </p>
+            </section>
+        </main>
+
+        <div id="toast" class="toast" hidden></div>
+        <script src="{{ url_for('static', filename='auth.js', v=asset_version) }}"></script>
+    </body>
+</html>

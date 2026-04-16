@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>University Coworking Control</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='styles.css', v=asset_version) }}"
+        />
+    </head>
+    <body data-theme="{{ bootstrap_user.theme }}">
+        <div class="grain-overlay" aria-hidden="true"></div>
+
+        <div class="app-shell" id="app-shell">
+            <aside class="sidebar">
+                <header class="brand">
+                    <span class="brand-mark">✶</span>
+                    <div>
+                        <p class="brand-label">Кампус</p>
+                        <h2>Campus Coworking</h2>
+                    </div>
+                </header>
+
+                <div class="sidebar-search">
+                    <label>
+                        Поиск
+                        <input
+                            type="search"
+                            placeholder="Поиск по спотам и бронированиям"
+                        />
+                    </label>
+                </div>
+
+                <nav class="sidebar-nav" aria-label="Разделы">
+                    <p class="nav-title">Основное</p>
+                    <button
+                        class="nav-link content-tab active"
+                        type="button"
+                        data-tab-target="main-tab"
+                    >
+                        <span class="nav-dot"></span>
+                        Главная
+                    </button>
+                    <button
+                        class="nav-link content-tab"
+                        type="button"
+                        data-tab-target="library-tab"
+                    >
+                        <span class="nav-dot"></span>
+                        Библиотека
+                    </button>
+                </nav>
+
+                <section class="card profile-card">
+                    <h3>Профиль</h3>
+                    <div class="profile-main">
+                        <div
+                            id="avatar-picker"
+                            class="avatar-picker"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Изменить аватар"
+                        >
+                            <img
+                                id="profile-avatar"
+                                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                                alt="Аватар пользователя"
+                            />
+                            <span class="avatar-overlay" aria-hidden="true">
+                                <span class="avatar-edit-icon">✎</span>
+                            </span>
+                        </div>
+                        <div>
+                            <p id="profile-name" class="profile-name">-</p>
+                            <p id="profile-nickname" class="profile-meta">-</p>
+                            <p id="profile-student" class="profile-meta">-</p>
+                        </div>
+                    </div>
+                    <input
+                        id="avatar-file"
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp,image/gif"
+                        hidden
+                    />
+                    <p class="subtle avatar-help">
+                        Нажмите на аватар, чтобы изменить изображение.
+                    </p>
+                </section>
+
+                <section class="card pomodoro-card">
+                    <div class="card-head-row">
+                        <h3>Pomodoro</h3>
+                        <div class="pomodoro-tags">
+                            <span class="tag">25/5</span>
+                            <span
+                                id="pomodoro-indicator"
+                                class="tag tag-live idle"
+                                >Пауза</span
+                            >
+                        </div>
+                    </div>
+                    <div id="pomodoro-time" class="timer">25:00</div>
+                    <div class="timer-controls">
+                        <button id="pomodoro-start" class="btn" type="button">
+                            Старт
+                        </button>
+                        <button
+                            id="pomodoro-pause"
+                            class="btn ghost"
+                            type="button"
+                        >
+                            Пауза
+                        </button>
+                        <button
+                            id="pomodoro-reset"
+                            class="btn ghost"
+                            type="button"
+                        >
+                            Сброс
+                        </button>
+                    </div>
+                    <p id="pomodoro-state" class="subtle">Фокус-сессия.</p>
+                </section>
+
+                <section class="card settings-card">
+                    <h3>Настройки</h3>
+                    <label>
+                        Тема интерфейса
+                        <select id="theme-select">
+                            <option value="light">Светлая</option>
+                            <option value="gray">Серая</option>
+                            <option value="black">Черная</option>
+                            <option value="blue">Синяя</option>
+                            <option value="green">Зеленая</option>
+                            <option value="purple">Фиолетовая</option>
+                        </select>
+                    </label>
+                </section>
+            </aside>
+
+            <main class="content-area">
+                <header class="page-header">
+                    <div class="page-title">
+                        <p class="eyebrow">Campus Coworking</p>
+                        <h1>Панель коворкинга</h1>
+                        <p class="subtle">
+                            Быстрый контроль мест, правил и загрузки
+                            пространства.
+                        </p>
+                    </div>
+                    <div class="page-actions">
+                        <label class="page-search">
+                            Поиск
+                            <input
+                                type="search"
+                                placeholder="Найти спот, бронь или материал"
+                            />
+                        </label>
+                        <div class="top-actions">
+                            <button
+                                class="btn ghost"
+                                id="logout-btn"
+                                type="button"
+                            >
+                                Выйти
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <nav
+                    class="content-tabs top-tabs"
+                    role="tablist"
+                    aria-label="Разделы"
+                >
+                    <button
+                        id="tab-main-btn"
+                        class="content-tab active"
+                        type="button"
+                        data-tab-target="main-tab"
+                    >
+                        Главная
+                    </button>
+                    <button
+                        id="tab-library-btn"
+                        class="content-tab"
+                        type="button"
+                        data-tab-target="library-tab"
+                    >
+                        Библиотека
+                    </button>
+                </nav>
+
+                <section id="main-tab" class="tab-panel active">
+                    <div class="dashboard-grid">
+                        <div class="dashboard-main">
+                            <section class="card stats-card">
+                                <h3>Активность</h3>
+                                <div class="stats-grid">
+                                    <article>
+                                        <p>Всего бронирований</p>
+                                        <strong id="total-bookings">0</strong>
+                                    </article>
+                                    <article>
+                                        <p>Забронировано часов</p>
+                                        <strong id="total-hours">0</strong>
+                                    </article>
+                                </div>
+                            </section>
+
+                            <section class="card spots-card">
+                                <div class="card-head-row">
+                                    <h3>Все споты</h3>
+                                    <span class="subtle"
+                                        >Нажмите на карточку для деталей и
+                                        перекуса рядом</span
+                                    >
+                                </div>
+                                <div id="spots-grid" class="spots-grid"></div>
+                            </section>
+
+                            <section class="card booking-card">
+                                <h3>Бронирование</h3>
+                                <form id="booking-form">
+                                    <label>
+                                        Спот
+                                        <select
+                                            id="booking-spot"
+                                            required
+                                        ></select>
+                                    </label>
+                                    <label>
+                                        Начало
+                                        <input
+                                            id="booking-start"
+                                            type="datetime-local"
+                                            step="1800"
+                                            required
+                                        />
+                                    </label>
+                                    <label>
+                                        Окончание
+                                        <input
+                                            id="booking-end"
+                                            type="datetime-local"
+                                            step="1800"
+                                            required
+                                        />
+                                    </label>
+                                    <button type="submit" class="btn">
+                                        Забронировать
+                                    </button>
+                                </form>
+                            </section>
+
+                            <section class="card lofi-card lofi-main-card">
+                                <h3>Lofi</h3>
+                                <div class="lofi-layout">
+                                    <div class="lofi-player-wrap">
+                                        <iframe
+                                            id="lofi-frame"
+                                            title="Lofi stream"
+                                            loading="lazy"
+                                            src="https://www.youtube-nocookie.com/embed/jfKfPfyJRdk"
+                                            allow="
+                                                accelerometer;
+                                                autoplay;
+                                                clipboard-write;
+                                                encrypted-media;
+                                                gyroscope;
+                                                picture-in-picture;
+                                            "
+                                            referrerpolicy="strict-origin-when-cross-origin"
+                                            allowfullscreen
+                                        ></iframe>
+                                        <p id="lofi-now-playing" class="subtle">
+                                            Сейчас: Lofi Girl - Study Beats
+                                        </p>
+                                    </div>
+                                    <div class="lofi-list-wrap">
+                                        <p class="subtle">
+                                            Плейлист фокуса: выберите канал или
+                                            микс.
+                                        </p>
+                                        <div
+                                            id="lofi-list"
+                                            class="lofi-list"
+                                        ></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        <aside class="dashboard-rail">
+                            <section class="card snacks-card">
+                                <h3>Где перекусить рядом</h3>
+                                <div id="snacks-list" class="snacks-list">
+                                    <p class="subtle">
+                                        Выберите спот, чтобы увидеть ближайшие
+                                        места.
+                                    </p>
+                                </div>
+                            </section>
+
+                            <section class="card rules-card">
+                                <h3>Правила использования</h3>
+                                <ul id="rules-list" class="rules-list">
+                                    {% for rule in rules %}
+                                    <li>{{ rule }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </section>
+
+                            <section class="card bookings-table-card">
+                                <h3>Мои бронирования и время</h3>
+                                <div class="table-wrap">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Спот</th>
+                                                <th>Начало</th>
+                                                <th>Окончание</th>
+                                                <th>Статус</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bookings-body"></tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </aside>
+                    </div>
+                </section>
+
+                <section id="library-tab" class="tab-panel" hidden>
+                    <section class="card library-card">
+                        <div class="card-head-row">
+                            <h3>Библиотека</h3>
+                            <span class="subtle"
+                                >Материалы для учебы по направлениям</span
+                            >
+                        </div>
+                        <div class="library-toolbar">
+                            <label class="library-search-label">
+                                Поиск материала
+                                <input
+                                    id="library-search"
+                                    type="search"
+                                    placeholder="Например: Алгоритмы, SQL, Английский"
+                                />
+                            </label>
+                            <p id="library-count" class="subtle">
+                                0 материалов
+                            </p>
+                        </div>
+                        <div class="library-layout">
+                            <aside class="library-sidebar">
+                                <button
+                                    type="button"
+                                    class="library-folder active"
+                                    data-folder="all"
+                                >
+                                    <span>Все материалы</span>
+                                    <span
+                                        class="folder-count"
+                                        data-count-for="all"
+                                        >0</span
+                                    >
+                                </button>
+                                <button
+                                    type="button"
+                                    class="library-folder"
+                                    data-folder="math"
+                                >
+                                    <span>Математика</span>
+                                    <span
+                                        class="folder-count"
+                                        data-count-for="math"
+                                        >0</span
+                                    >
+                                </button>
+                                <button
+                                    type="button"
+                                    class="library-folder"
+                                    data-folder="cs"
+                                >
+                                    <span>Информатика</span>
+                                    <span
+                                        class="folder-count"
+                                        data-count-for="cs"
+                                        >0</span
+                                    >
+                                </button>
+                                <button
+                                    type="button"
+                                    class="library-folder"
+                                    data-folder="eng"
+                                >
+                                    <span>Инженерия</span>
+                                    <span
+                                        class="folder-count"
+                                        data-count-for="eng"
+                                        >0</span
+                                    >
+                                </button>
+                                <button
+                                    type="button"
+                                    class="library-folder"
+                                    data-folder="eco"
+                                >
+                                    <span>Экономика</span>
+                                    <span
+                                        class="folder-count"
+                                        data-count-for="eco"
+                                        >0</span
+                                    >
+                                </button>
+                                <button
+                                    type="button"
+                                    class="library-folder"
+                                    data-folder="lang"
+                                >
+                                    <span>Языки</span>
+                                    <span
+                                        class="folder-count"
+                                        data-count-for="lang"
+                                        >0</span
+                                    >
+                                </button>
+                            </aside>
+                            <div id="library-grid" class="library-grid"></div>
+                        </div>
+                    </section>
+                </section>
+            </main>
+        </div>
+
+        <div id="rules-modal" class="modal" hidden>
+            <div class="modal-backdrop"></div>
+            <section class="modal-panel">
+                <h3>Правила Коворкинга</h3>
+                <p class="subtle">
+                    Ознакомьтесь с правилами перед началом использования
+                    системы.
+                </p>
+                <ul id="rules-modal-list" class="rules-list modal-rules-list">
+                    {% for rule in rules %}
+                    <li>{{ rule }}</li>
+                    {% endfor %}
+                </ul>
+                <button
+                    id="rules-accept-btn"
+                    type="button"
+                    class="btn modal-full-btn"
+                >
+                    Я ознакомился с правилами
+                </button>
+            </section>
+        </div>
+
+        <div id="toast" class="toast" hidden></div>
+
+        <script>
+            window.__BOOTSTRAP__ = {
+                user: {{ bootstrap_user|tojson }},
+                studentIdHint: {{ student_id_hint|tojson }},
+                minBookingMinutes: {{ min_booking_minutes|tojson }}
+            };
+        </script>
+        <script src="{{ url_for('static', filename='app.js', v=asset_version) }}"></script>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="112" y1="42" x2="1028" y2="396" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="0.45" stop-color="#113A4A"/>
+      <stop offset="1" stop-color="#1B4332"/>
+    </linearGradient>
+    <linearGradient id="card" x1="825" y1="72" x2="1044" y2="302" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#F8FAFC" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="176" y1="86" x2="620" y2="264" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#FDE68A"/>
+    </linearGradient>
+    <filter id="blur1" x="738" y="16" width="354" height="354" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="30" result="effect1_foregroundBlur_1_1"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="420" rx="32" fill="url(#bg)"/>
+  <rect x="22" y="22" width="1156" height="376" rx="24" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
+
+  <circle cx="955" cy="193" r="87" fill="#14B8A6" fill-opacity="0.22"/>
+  <g filter="url(#blur1)">
+    <circle cx="915" cy="193" r="57" fill="#F59E0B" fill-opacity="0.42"/>
+  </g>
+
+  <path d="M84 306C158 270 232 262 310 281C389 300 466 336 556 324C644 311 719 246 789 216" stroke="white" stroke-opacity="0.15" stroke-width="3" stroke-linecap="round"/>
+  <path d="M84 333C163 302 223 303 307 321C388 338 456 364 529 356C622 346 702 279 767 247" stroke="#FDE68A" stroke-opacity="0.28" stroke-width="2" stroke-linecap="round"/>
+
+  <rect x="94" y="74" width="118" height="34" rx="17" fill="white" fill-opacity="0.12"/>
+  <text x="153" y="96" fill="#E2E8F0" font-family="Space Grotesk, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">FLASK + SQLITE</text>
+
+  <text x="94" y="172" fill="url(#accent)" font-family="Space Grotesk, Arial, sans-serif" font-size="56" font-weight="700">Campus</text>
+  <text x="94" y="236" fill="#F8FAFC" font-family="Space Grotesk, Arial, sans-serif" font-size="72" font-weight="700">Coworking</text>
+  <text x="96" y="281" fill="#CBD5E1" font-family="IBM Plex Mono, Menlo, monospace" font-size="22" font-weight="500">Book spots. Focus better. Make campus feel alive.</text>
+
+  <rect x="96" y="315" width="140" height="38" rx="19" fill="#F59E0B"/>
+  <text x="166" y="339" fill="#111827" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">SMART BOOKING</text>
+
+  <rect x="248" y="315" width="110" height="38" rx="19" fill="white" fill-opacity="0.12"/>
+  <text x="303" y="339" fill="#F8FAFC" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">POMODORO</text>
+
+  <rect x="370" y="315" width="84" height="38" rx="19" fill="white" fill-opacity="0.12"/>
+  <text x="412" y="339" fill="#F8FAFC" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">LOFI</text>
+
+  <rect x="781" y="76" width="303" height="246" rx="28" fill="url(#card)" stroke="white" stroke-opacity="0.14"/>
+  <rect x="808" y="104" width="249" height="38" rx="19" fill="#0F172A" fill-opacity="0.52"/>
+  <circle cx="834" cy="123" r="7" fill="#F59E0B"/>
+  <circle cx="858" cy="123" r="7" fill="#14B8A6"/>
+  <circle cx="882" cy="123" r="7" fill="#E2E8F0" fill-opacity="0.75"/>
+
+  <rect x="808" y="162" width="108" height="110" rx="20" fill="white" fill-opacity="0.08"/>
+  <rect x="929" y="162" width="128" height="24" rx="12" fill="#F8FAFC" fill-opacity="0.84"/>
+  <rect x="929" y="198" width="102" height="18" rx="9" fill="#F59E0B" fill-opacity="0.92"/>
+  <rect x="929" y="228" width="84" height="18" rx="9" fill="#14B8A6" fill-opacity="0.9"/>
+  <rect x="929" y="258" width="116" height="14" rx="7" fill="white" fill-opacity="0.18"/>
+
+  <text x="822" y="196" fill="#F8FAFC" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="700">25:00</text>
+  <text x="822" y="222" fill="#CBD5E1" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" font-weight="500">Focus session</text>
+  <text x="929" y="153" fill="#CBD5E1" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" font-weight="500">dashboard snapshot</text>
+</svg>
