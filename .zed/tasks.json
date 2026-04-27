@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Run Flask app",
+    "command": ".venv/bin/python main.py",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Install Python dependencies",
+    "command": ".venv/bin/python -m pip install -r requirements.txt",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "Check Flask import",
+    "command": ".venv/bin/python -c 'import flask; print(flask.__version__)'",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false
+  }
+]

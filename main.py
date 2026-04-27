@@ -9,7 +9,8 @@ from functools import wraps
 from typing import Any
 from uuid import uuid4
 
-from flask import Flask, jsonify, redirect, render_template, request, session, url_for
+import Flask
+from flask import Flask, jsonify, redirect, render_template, request, session, url_for  # pyright: ignore[reportMissingImports]
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 

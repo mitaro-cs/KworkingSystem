@@ -1,65 +1,89 @@
-<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="420" viewBox="0 0 1200 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Campus Coworking dashboard banner</title>
+  <desc id="desc">A monochrome university coworking dashboard illustration with booking, focus timer, activity cards and a library panel.</desc>
+
   <defs>
-    <linearGradient id="bg" x1="112" y1="42" x2="1028" y2="396" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0F172A"/>
-      <stop offset="0.45" stop-color="#113A4A"/>
-      <stop offset="1" stop-color="#1B4332"/>
+    <linearGradient id="bg" x1="66" y1="32" x2="1092" y2="396" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#050505"/>
+      <stop offset="0.55" stop-color="#151515"/>
+      <stop offset="1" stop-color="#262626"/>
     </linearGradient>
-    <linearGradient id="card" x1="825" y1="72" x2="1044" y2="302" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F8FAFC" stop-opacity="0.22"/>
-      <stop offset="1" stop-color="#F8FAFC" stop-opacity="0.08"/>
+    <linearGradient id="gold" x1="78" y1="104" x2="434" y2="232" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#BDBDBD"/>
     </linearGradient>
-    <linearGradient id="accent" x1="176" y1="86" x2="620" y2="264" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F59E0B"/>
-      <stop offset="1" stop-color="#FDE68A"/>
+    <linearGradient id="panel" x1="706" y1="68" x2="1096" y2="348" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.1"/>
     </linearGradient>
-    <filter id="blur1" x="738" y="16" width="354" height="354" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-      <feGaussianBlur stdDeviation="30" result="effect1_foregroundBlur_1_1"/>
+    <linearGradient id="seat" x1="790" y1="172" x2="1008" y2="259" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#AFAFAF"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" stroke="#FFFFFF" stroke-opacity="0.045" stroke-width="1"/>
+    </pattern>
+    <filter id="shadow" x="640" y="34" width="520" height="340" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity="0.26"/>
     </filter>
   </defs>
 
-  <rect width="1200" height="420" rx="32" fill="url(#bg)"/>
-  <rect x="22" y="22" width="1156" height="376" rx="24" stroke="white" stroke-opacity="0.08" stroke-width="2"/>
+  <rect width="1200" height="420" rx="28" fill="url(#bg)"/>
+  <rect width="1200" height="420" rx="28" fill="url(#grid)"/>
+  <rect x="24" y="24" width="1152" height="372" rx="20" stroke="#FFFFFF" stroke-opacity="0.11" stroke-width="2"/>
 
-  <circle cx="955" cy="193" r="87" fill="#14B8A6" fill-opacity="0.22"/>
-  <g filter="url(#blur1)">
-    <circle cx="915" cy="193" r="57" fill="#F59E0B" fill-opacity="0.42"/>
+  <rect x="76" y="62" width="176" height="34" rx="8" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.14"/>
+  <text x="164" y="84" fill="#E5E5E5" font-family="Space Grotesk, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">FLASK + SQLITE</text>
+
+  <text x="76" y="160" fill="url(#gold)" font-family="Space Grotesk, Arial, sans-serif" font-size="58" font-weight="700">Campus</text>
+  <text x="76" y="224" fill="#FFFFFF" font-family="Space Grotesk, Arial, sans-serif" font-size="66" font-weight="700">Coworking</text>
+
+  <text x="80" y="272" fill="#D4D4D4" font-family="IBM Plex Mono, Menlo, monospace" font-size="20" font-weight="500">Book spots, track focus time, and keep</text>
+  <text x="80" y="300" fill="#D4D4D4" font-family="IBM Plex Mono, Menlo, monospace" font-size="20" font-weight="500">the campus workspace organized.</text>
+
+  <g font-family="Space Grotesk, Arial, sans-serif" font-size="14" font-weight="700">
+    <rect x="78" y="332" width="136" height="36" rx="8" fill="#FFFFFF"/>
+    <text x="146" y="355" fill="#050505" text-anchor="middle">BOOKING</text>
+
+    <rect x="228" y="332" width="122" height="36" rx="8" fill="#FFFFFF" fill-opacity="0.11" stroke="#FFFFFF" stroke-opacity="0.12"/>
+    <text x="289" y="355" fill="#FFFFFF" text-anchor="middle">POMODORO</text>
+
+    <rect x="364" y="332" width="92" height="36" rx="8" fill="#FFFFFF" fill-opacity="0.11" stroke="#FFFFFF" stroke-opacity="0.12"/>
+    <text x="410" y="355" fill="#FFFFFF" text-anchor="middle">LOFI</text>
   </g>
 
-  <path d="M84 306C158 270 232 262 310 281C389 300 466 336 556 324C644 311 719 246 789 216" stroke="white" stroke-opacity="0.15" stroke-width="3" stroke-linecap="round"/>
-  <path d="M84 333C163 302 223 303 307 321C388 338 456 364 529 356C622 346 702 279 767 247" stroke="#FDE68A" stroke-opacity="0.28" stroke-width="2" stroke-linecap="round"/>
+  <g filter="url(#shadow)">
+    <rect x="688" y="62" width="424" height="292" rx="18" fill="url(#panel)" stroke="#FFFFFF" stroke-opacity="0.16"/>
+    <rect x="710" y="84" width="380" height="44" rx="10" fill="#050505" fill-opacity="0.55" stroke="#FFFFFF" stroke-opacity="0.08"/>
+    <circle cx="734" cy="106" r="6" fill="#FFFFFF"/>
+    <circle cx="756" cy="106" r="6" fill="#BDBDBD"/>
+    <circle cx="778" cy="106" r="6" fill="#E5E5E5" fill-opacity="0.72"/>
+    <text x="1038" y="111" fill="#BDBDBD" font-family="IBM Plex Mono, Menlo, monospace" font-size="12" font-weight="500" text-anchor="end">live dashboard</text>
 
-  <rect x="94" y="74" width="118" height="34" rx="17" fill="white" fill-opacity="0.12"/>
-  <text x="153" y="96" fill="#E2E8F0" font-family="Space Grotesk, Arial, sans-serif" font-size="14" font-weight="700" text-anchor="middle">FLASK + SQLITE</text>
+    <rect x="710" y="146" width="160" height="86" rx="12" fill="#050505" fill-opacity="0.5" stroke="#FFFFFF" stroke-opacity="0.09"/>
+    <text x="730" y="174" fill="#E5E5E5" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" font-weight="500">occupied seats</text>
+    <text x="730" y="212" fill="#FFFFFF" font-family="Space Grotesk, Arial, sans-serif" font-size="36" font-weight="700">37%</text>
+    <rect x="812" y="190" width="34" height="10" rx="5" fill="#FFFFFF"/>
+    <rect x="812" y="206" width="22" height="10" rx="5" fill="#BDBDBD"/>
 
-  <text x="94" y="172" fill="url(#accent)" font-family="Space Grotesk, Arial, sans-serif" font-size="56" font-weight="700">Campus</text>
-  <text x="94" y="236" fill="#F8FAFC" font-family="Space Grotesk, Arial, sans-serif" font-size="72" font-weight="700">Coworking</text>
-  <text x="96" y="281" fill="#CBD5E1" font-family="IBM Plex Mono, Menlo, monospace" font-size="22" font-weight="500">Book spots. Focus better. Make campus feel alive.</text>
+    <rect x="888" y="146" width="202" height="86" rx="12" fill="#050505" fill-opacity="0.5" stroke="#FFFFFF" stroke-opacity="0.09"/>
+    <text x="908" y="174" fill="#E5E5E5" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" font-weight="500">focus session</text>
+    <text x="908" y="212" fill="#FFFFFF" font-family="Space Grotesk, Arial, sans-serif" font-size="36" font-weight="700">25:00</text>
+    <rect x="1012" y="188" width="44" height="22" rx="7" fill="#FFFFFF"/>
+    <text x="1034" y="203" fill="#050505" font-family="Space Grotesk, Arial, sans-serif" font-size="11" font-weight="700" text-anchor="middle">RUN</text>
 
-  <rect x="96" y="315" width="140" height="38" rx="19" fill="#F59E0B"/>
-  <text x="166" y="339" fill="#111827" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">SMART BOOKING</text>
+    <rect x="710" y="250" width="220" height="82" rx="12" fill="#050505" fill-opacity="0.5" stroke="#FFFFFF" stroke-opacity="0.09"/>
+    <text x="730" y="278" fill="#E5E5E5" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" font-weight="500">available spots</text>
+    <g fill="url(#seat)">
+      <rect x="730" y="296" width="34" height="16" rx="5"/>
+      <rect x="774" y="296" width="34" height="16" rx="5" opacity="0.72"/>
+      <rect x="818" y="296" width="34" height="16" rx="5" opacity="0.42"/>
+    </g>
+    <rect x="862" y="296" width="42" height="16" rx="5" fill="#FFFFFF" fill-opacity="0.14"/>
 
-  <rect x="248" y="315" width="110" height="38" rx="19" fill="white" fill-opacity="0.12"/>
-  <text x="303" y="339" fill="#F8FAFC" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">POMODORO</text>
-
-  <rect x="370" y="315" width="84" height="38" rx="19" fill="white" fill-opacity="0.12"/>
-  <text x="412" y="339" fill="#F8FAFC" font-family="Space Grotesk, Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">LOFI</text>
-
-  <rect x="781" y="76" width="303" height="246" rx="28" fill="url(#card)" stroke="white" stroke-opacity="0.14"/>
-  <rect x="808" y="104" width="249" height="38" rx="19" fill="#0F172A" fill-opacity="0.52"/>
-  <circle cx="834" cy="123" r="7" fill="#F59E0B"/>
-  <circle cx="858" cy="123" r="7" fill="#14B8A6"/>
-  <circle cx="882" cy="123" r="7" fill="#E2E8F0" fill-opacity="0.75"/>
-
-  <rect x="808" y="162" width="108" height="110" rx="20" fill="white" fill-opacity="0.08"/>
-  <rect x="929" y="162" width="128" height="24" rx="12" fill="#F8FAFC" fill-opacity="0.84"/>
-  <rect x="929" y="198" width="102" height="18" rx="9" fill="#F59E0B" fill-opacity="0.92"/>
-  <rect x="929" y="228" width="84" height="18" rx="9" fill="#14B8A6" fill-opacity="0.9"/>
-  <rect x="929" y="258" width="116" height="14" rx="7" fill="white" fill-opacity="0.18"/>
-
-  <text x="822" y="196" fill="#F8FAFC" font-family="Space Grotesk, Arial, sans-serif" font-size="30" font-weight="700">25:00</text>
-  <text x="822" y="222" fill="#CBD5E1" font-family="IBM Plex Mono, Menlo, monospace" font-size="14" font-weight="500">Focus session</text>
-  <text x="929" y="153" fill="#CBD5E1" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" font-weight="500">dashboard snapshot</text>
+    <rect x="948" y="250" width="142" height="82" rx="12" fill="#050505" fill-opacity="0.5" stroke="#FFFFFF" stroke-opacity="0.09"/>
+    <text x="968" y="278" fill="#E5E5E5" font-family="IBM Plex Mono, Menlo, monospace" font-size="13" font-weight="500">library</text>
+    <rect x="968" y="294" width="88" height="8" rx="4" fill="#FFFFFF" fill-opacity="0.72"/>
+    <rect x="968" y="312" width="70" height="8" rx="4" fill="#BDBDBD" fill-opacity="0.8"/>
+  </g>
 </svg>

@@ -1,14 +1,14 @@
 :root {
     --font-head: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
     --font-mono: "IBM Plex Mono", "Menlo", monospace;
-    --radius: 18px;
-    --radius-lg: 26px;
-    --radius-md: 18px;
-    --radius-sm: 12px;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --radius-md: 8px;
+    --radius-sm: 8px;
     --border: 1px solid var(--line);
-    --shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
-    --shadow-soft: 0 12px 24px rgba(0, 0, 0, 0.18);
-    --shadow-card: 0 14px 30px rgba(0, 0, 0, 0.18);
+    --shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+    --shadow-soft: 0 10px 24px rgba(0, 0, 0, 0.14);
+    --shadow-card: 0 10px 22px rgba(0, 0, 0, 0.12);
     --bg-glow-1: rgba(255, 255, 255, 0.1);
     --bg-glow-2: rgba(255, 255, 255, 0.05);
 }
@@ -113,18 +113,12 @@ body {
     --surface-3: color-mix(in srgb, var(--card), var(--bg) 44%);
     --border-soft: 1px solid color-mix(in srgb, var(--line), transparent 55%);
     --border-strong: 1px solid color-mix(in srgb, var(--line), var(--ink) 16%);
-    background:
-        radial-gradient(
-            circle at 14% 16%,
-            color-mix(in srgb, var(--bg-glow-1), transparent 45%),
-            transparent 40%
-        ),
-        radial-gradient(
-            circle at 88% 10%,
-            color-mix(in srgb, var(--bg-glow-2), transparent 55%),
-            transparent 36%
-        ),
-        var(--bg);
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--bg), var(--panel) 8%),
+        var(--bg) 42%,
+        color-mix(in srgb, var(--bg), #000 7%)
+    );
     min-height: 100vh;
 }
 
@@ -132,9 +126,11 @@ body {
     position: fixed;
     inset: 0;
     pointer-events: none;
-    opacity: 0.12;
-    background-image: radial-gradient(var(--ink) 0.7px, transparent 0.7px);
-    background-size: 4px 4px;
+    opacity: 0.055;
+    background-image:
+        linear-gradient(var(--ink) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+    background-size: 32px 32px;
     mix-blend-mode: soft-light;
     z-index: 0;
 }
@@ -144,7 +140,7 @@ h2,
 h3,
 strong {
     margin: 0;
-    letter-spacing: 0.01em;
+    letter-spacing: 0;
 }
 
 p {
@@ -172,7 +168,7 @@ select,
 textarea {
     border: var(--border);
     background: transparent;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px 12px;
 }
 
@@ -191,7 +187,7 @@ textarea:focus {
 .content-area textarea {
     background: color-mix(in srgb, var(--surface-3), transparent 10%);
     border: var(--border-soft);
-    border-radius: 12px;
+    border-radius: 8px;
 }
 
 .sidebar input::placeholder,
@@ -206,9 +202,13 @@ textarea:focus {
     background: var(--accent);
     color: var(--bg);
     padding: 9px 16px;
-    border-radius: 999px;
+    border-radius: 8px;
     font-weight: 700;
     cursor: pointer;
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
 }
 
 a.btn {
@@ -220,6 +220,7 @@ a.btn {
 
 .btn:hover {
     filter: brightness(0.96);
+    transform: translateY(-1px);
 }
 
 .btn:disabled {
@@ -243,7 +244,7 @@ a.btn {
     align-items: center;
     justify-content: center;
     padding: 5px 10px;
-    border-radius: 999px;
+    border-radius: 7px;
     font-size: 0.77rem;
     background: color-mix(in srgb, var(--tag), transparent 20%);
     color: var(--tag-ink);
@@ -284,18 +285,7 @@ a.btn {
     min-height: 100vh;
     overflow: auto;
     color: var(--auth-900);
-    background:
-        radial-gradient(
-            circle at 16% 14%,
-            rgba(255, 255, 255, 0.07),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 86% 8%,
-            rgba(255, 255, 255, 0.04),
-            transparent 33%
-        ),
-        var(--auth-0);
+    background: linear-gradient(180deg, var(--auth-0), var(--auth-100));
 }
 
 .auth-layout {
@@ -346,7 +336,7 @@ a.btn {
     letter-spacing: 0.04em;
     color: var(--auth-950);
     padding: 7px 12px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid rgba(245, 245, 245, 0.45);
     backdrop-filter: blur(3px);
 }
@@ -412,7 +402,7 @@ a.btn {
     border: 1px solid var(--auth-300);
     background: transparent;
     color: var(--auth-700);
-    border-radius: 999px;
+    border-radius: 8px;
     padding: 7px 14px;
     font-size: clamp(0.8rem, 0.95vw, 0.9rem);
     line-height: 1.2;
@@ -455,7 +445,7 @@ a.btn {
     width: 100%;
     background: var(--auth-100);
     border: 1px solid var(--auth-200);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 10px 12px;
     font-size: clamp(0.83rem, 0.9vw, 0.95rem);
     min-height: 42px;
@@ -520,7 +510,7 @@ a.btn {
     background: var(--auth-200);
     color: var(--auth-900);
     border: 1px solid var(--auth-300);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 10px 16px;
     font-size: clamp(0.82rem, 0.92vw, 0.9rem);
     font-weight: 700;
@@ -554,10 +544,10 @@ a.btn {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
+    grid-template-columns: minmax(260px, 292px) minmax(0, 1fr);
     align-items: start;
-    gap: 18px;
-    padding: 24px;
+    gap: 16px;
+    padding: clamp(14px, 2vw, 24px);
     min-height: 100vh;
     max-width: 1560px;
     margin: 0 auto;
@@ -571,6 +561,9 @@ a.btn {
 }
 
 .sidebar {
+    position: sticky;
+    top: 24px;
+    max-height: calc(100vh - 48px);
     background: var(--surface-1);
     padding: 14px;
     overflow-y: auto;
@@ -581,18 +574,11 @@ a.btn {
 }
 
 .content-area {
-    background:
-        linear-gradient(
-            145deg,
-            color-mix(in srgb, var(--surface-2), transparent 15%),
-            transparent
-        ),
-        radial-gradient(
-            circle at 70% 20%,
-            color-mix(in srgb, var(--ink), transparent 92%),
-            transparent 42%
-        ),
-        var(--surface-1);
+    background: linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--surface-2), transparent 10%),
+        var(--surface-1)
+    );
     padding: 18px 20px;
     overflow-y: auto;
     box-shadow: var(--shadow-soft);
@@ -635,7 +621,7 @@ a.btn {
     width: 100%;
     background: color-mix(in srgb, var(--surface-2), transparent 10%);
     border: var(--border-soft);
-    border-radius: 999px;
+    border-radius: 8px;
     padding: 8px 12px;
     font-size: 0.85rem;
 }
@@ -659,7 +645,7 @@ a.btn {
     display: flex;
     align-items: center;
     gap: 10px;
-    border-radius: 12px;
+    border-radius: 8px;
     border: var(--border-soft);
     background: transparent;
     color: color-mix(in srgb, var(--muted), var(--ink) 15%);
@@ -845,7 +831,7 @@ a.btn {
     width: 100%;
     min-height: 190px;
     border: var(--border);
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .lofi-layout {
@@ -866,7 +852,7 @@ a.btn {
 
 .lofi-list-wrap {
     border: var(--border-soft);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px;
     background: var(--surface-3);
 }
@@ -879,7 +865,7 @@ a.btn {
 
 .lofi-track {
     border: var(--border-soft);
-    border-radius: 10px;
+    border-radius: 8px;
     background: transparent;
     color: var(--ink);
     text-align: left;
@@ -947,7 +933,7 @@ a.btn {
     width: min(360px, 100%);
     background: color-mix(in srgb, var(--surface-2), transparent 8%);
     border: var(--border-soft);
-    border-radius: 999px;
+    border-radius: 8px;
     padding: 8px 14px;
     font-size: 0.88rem;
 }
@@ -964,7 +950,7 @@ a.btn {
     align-items: center;
     gap: 6px;
     padding: 4px;
-    border-radius: 999px;
+    border-radius: 10px;
     background: color-mix(in srgb, var(--surface-2), transparent 8%);
     border: var(--border-soft);
     margin-bottom: 14px;
@@ -974,7 +960,7 @@ a.btn {
     border: none;
     background: transparent;
     color: color-mix(in srgb, var(--muted), var(--ink) 10%);
-    border-radius: 999px;
+    border-radius: 7px;
     padding: 6px 14px;
     cursor: pointer;
     font-size: 0.85rem;
@@ -988,7 +974,7 @@ a.btn {
 
 .sidebar-nav .nav-link {
     border: var(--border-soft);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 9px 12px;
 }
 
@@ -1030,7 +1016,7 @@ a.btn {
 
 .library-sidebar {
     border: var(--border-soft);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 8px;
     display: grid;
     gap: 6px;
@@ -1044,7 +1030,7 @@ a.btn {
     align-items: center;
     gap: 8px;
     border: var(--border-soft);
-    border-radius: 9px;
+    border-radius: 8px;
     background: transparent;
     color: var(--ink);
     text-align: left;
@@ -1071,7 +1057,7 @@ a.btn {
 
 .library-item {
     border: var(--border-soft);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 10px;
     background: var(--surface-3);
 }
@@ -1088,7 +1074,7 @@ a.btn {
 
 .library-open-btn {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 6px 10px;
     margin-top: 6px;
     font-size: 0.82rem;
@@ -1096,7 +1082,7 @@ a.btn {
 
 .library-empty {
     border: var(--border-soft);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 16px;
     background: var(--surface-3);
 }
@@ -1105,7 +1091,7 @@ a.btn {
     display: block;
     width: 100%;
     aspect-ratio: 3 / 4;
-    border-radius: 10px;
+    border-radius: 8px;
     border: var(--border);
 }
 
@@ -1142,7 +1128,7 @@ a.btn {
 .spot-card {
     position: relative;
     border: var(--border-soft);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 12px 12px 12px;
     background: color-mix(in srgb, var(--surface-3), transparent 6%);
     cursor: pointer;
@@ -1190,13 +1176,63 @@ a.btn {
     color: var(--muted);
 }
 
+.spot-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.spot-facts span {
+    border: var(--border-soft);
+    border-radius: 7px;
+    padding: 4px 7px;
+    color: color-mix(in srgb, var(--muted), var(--ink) 12%);
+    font-size: 0.76rem;
+}
+
+.spot-load {
+    height: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--line), transparent 70%);
+}
+
+.spot-load span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--accent);
+}
+
+.spot-load.low span {
+    width: 28%;
+}
+
+.spot-load.medium span {
+    width: 58%;
+}
+
+.spot-load.high span {
+    width: 86%;
+}
+
+.search-empty {
+    grid-column: 1 / -1;
+    border: var(--border-soft);
+    border-radius: 8px;
+    padding: 14px;
+    background: color-mix(in srgb, var(--surface-3), transparent 6%);
+}
+
 .favorite-star {
     position: absolute;
     top: 9px;
     right: 9px;
     width: 28px;
     height: 28px;
-    border-radius: 999px;
+    border-radius: 8px;
     border: 1px solid color-mix(in srgb, var(--line), var(--ink) 25%);
     background: color-mix(in srgb, var(--surface-2), transparent 20%);
     color: var(--ink);
@@ -1243,7 +1279,7 @@ body[data-theme="light"] .favorite-star.active {
 
 .snack-item {
     border: var(--border-soft);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px;
 }
 
@@ -1258,7 +1294,7 @@ body[data-theme="light"] .favorite-star.active {
     width: 100%;
     overflow-x: auto;
     border: var(--border-soft);
-    border-radius: 12px;
+    border-radius: 8px;
     background: color-mix(in srgb, var(--surface-3), transparent 6%);
 }
 
@@ -1285,6 +1321,40 @@ th {
     font-weight: 500;
 }
 
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    border: var(--border-soft);
+    border-radius: 7px;
+    padding: 4px 7px;
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+}
+
+.status-active {
+    color: #8fe6b3;
+    border-color: color-mix(in srgb, #8fe6b3, transparent 45%);
+}
+
+.status-upcoming {
+    color: #9fcbff;
+    border-color: color-mix(in srgb, #9fcbff, transparent 45%);
+}
+
+.status-completed {
+    color: var(--muted);
+}
+
+body[data-theme="light"] .status-active {
+    color: #146c43;
+    border-color: color-mix(in srgb, #146c43, transparent 55%);
+}
+
+body[data-theme="light"] .status-upcoming {
+    color: #1d4e89;
+    border-color: color-mix(in srgb, #1d4e89, transparent 55%);
+}
+
 .toast {
     position: fixed;
     bottom: 18px;
@@ -1292,7 +1362,7 @@ th {
     z-index: 10;
     background: var(--card);
     border: var(--border);
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 10px 14px;
     max-width: 320px;
     box-shadow: var(--shadow);
@@ -1321,7 +1391,7 @@ th {
 .modal-panel {
     position: relative;
     width: min(560px, 100%);
-    border-radius: 16px;
+    border-radius: 8px;
     border: var(--border);
     background: var(--card);
     padding: 16px;
@@ -1388,6 +1458,8 @@ th {
     }
 
     .sidebar {
+        position: static;
+        top: auto;
         max-height: none;
         overflow-y: visible;
         order: 2;
@@ -1482,7 +1554,7 @@ th {
     .auth-field input {
         font-size: 0.86rem;
         min-height: 40px;
-        border-radius: 12px;
+        border-radius: 8px;
     }
 
     .auth-form-meta {
@@ -1516,7 +1588,7 @@ th {
 
     .card {
         padding: 14px;
-        border-radius: 20px;
+        border-radius: 8px;
     }
 
     .content-tabs {

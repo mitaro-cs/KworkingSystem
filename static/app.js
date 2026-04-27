@@ -16,6 +16,7 @@ const state = {
   rules: [],
   selectedSpotId: null,
   activeLofiTrackId: null,
+  searchQuery: "",
   library: {
     folder: "all",
     query: "",
@@ -34,6 +35,8 @@ const DEFAULT_THEME = "gray";
 const dom = {
   toast: document.getElementById("toast"),
   logoutBtn: document.getElementById("logout-btn"),
+  globalSearch: document.getElementById("global-search"),
+  sidebarGlobalSearch: document.getElementById("sidebar-global-search"),
   themeSelect: document.getElementById("theme-select"),
   avatarPicker: document.getElementById("avatar-picker"),
   profileAvatar: document.getElementById("profile-avatar"),
@@ -471,7 +474,9 @@ function renderUser() {
   };
   dom.profileAvatar.src = state.user.avatar_url || fallbackAvatar;
   dom.profileName.textContent = `${state.user.first_name} ${state.user.last_name}`;
-  dom.profileNickname.textContent = `Ник: @${state.user.nickname}`;
+  dom.profileNickname.textContent = state.user.is_admin
+    ? `Админ · @${state.user.nickname}`
+    : `Ник: @${state.user.nickname}`;
   dom.profileStudent.textContent = `Студбилет: ${state.user.student_id}`;
   state.user.theme = applyTheme(state.user.theme || DEFAULT_THEME);
 }
@@ -491,12 +496,22 @@ function renderSpots() {
   const hasSelected = state.spots.some((spot) => spot.id === selectedId);
   const activeSelectedId = hasSelected ? selectedId : state.spots[0].id;
   state.selectedSpotId = activeSelectedId;
+  const visibleSpots = state.spots.filter(spotMatchesSearch);
 
-  dom.spotsGrid.innerHTML = state.spots
-    .map((spot) => {
-      const isFavorite = spot.id === favoriteId;
-      const selected = spot.id === activeSelectedId;
-      return `
+  if (!visibleSpots.length) {
+    dom.spotsGrid.innerHTML =
+      '<p class="subtle search-empty">По фильтру спотов не найдено.</p>';
+  } else {
+    dom.spotsGrid.innerHTML = visibleSpots
+      .map((spot) => {
+        const isFavorite = spot.id === favoriteId;
+        const selected = spot.id === activeSelectedId;
+        const loadPercent = spot.capacity
+          ? Math.round((Number(spot.active_count || 0) / spot.capacity) * 100)
+          : 0;
+        const loadClass =
+          loadPercent >= 80 ? "high" : loadPercent >= 40 ? "medium" : "low";
+        return `
         <article class="spot-card ${isFavorite ? "favorite" : ""} ${selected ? "selected" : ""}" data-spot-id="${spot.id}">
           <button
             type="button"
@@ -506,12 +521,16 @@ function renderSpots() {
           >${isFavorite ? "★" : "☆"}</button>
           <h4><span class="spot-dot" aria-hidden="true"></span>${esc(spot.name)}</h4>
           <p>${esc(spot.building)} · ${esc(spot.zone)}</p>
-          <p>Вместимость: ${spot.capacity}</p>
-          <p>Сейчас занято: ${spot.active_count}</p>
+          <div class="spot-facts">
+            <span>${spot.capacity} мест</span>
+            <span>${spot.active_count} занято</span>
+          </div>
+          <div class="spot-load ${loadClass}" aria-hidden="true"><span></span></div>
         </article>
       `;
-    })
-    .join("");
+      })
+      .join("");
+  }
 
   const options = state.spots
     .map(
@@ -530,6 +549,44 @@ function stateLabel(booking) {
   return "Завершено";
 }
 
+function normalizeSearch(value) {
+  return String(value || "")
+    .trim()
+    .toLowerCase();
+}
+
+function spotMatchesSearch(spot) {
+  const query = normalizeSearch(state.searchQuery);
+  if (!query) return true;
+  const haystack = [
+    spot.name,
+    spot.building,
+    spot.floor,
+    spot.zone,
+    spot.description,
+    spot.capacity,
+    spot.active_count,
+  ]
+    .join(" ")
+    .toLowerCase();
+  return haystack.includes(query);
+}
+
+function bookingMatchesSearch(booking) {
+  const query = normalizeSearch(state.searchQuery);
+  if (!query) return true;
+  const haystack = [
+    booking.spot_name,
+    booking.building,
+    formatDateTime(booking.start_at),
+    formatDateTime(booking.end_at),
+    stateLabel(booking),
+  ]
+    .join(" ")
+    .toLowerCase();
+  return haystack.includes(query);
+}
+
 function renderBookings() {
   dom.totalBookings.textContent = String(state.bookings.length);
 
@@ -543,20 +600,28 @@ function renderBookings() {
 
   dom.totalHours.textContent = (totalMinutes / 60).toFixed(1);
 
+  const visibleBookings = state.bookings.filter(bookingMatchesSearch);
+
   if (!state.bookings.length) {
     dom.bookingsBody.innerHTML =
       '<tr><td colspan="4" class="subtle">У вас пока нет бронирований.</td></tr>';
     return;
   }
 
-  dom.bookingsBody.innerHTML = state.bookings
+  if (!visibleBookings.length) {
+    dom.bookingsBody.innerHTML =
+      '<tr><td colspan="4" class="subtle">По фильтру бронирований не найдено.</td></tr>';
+    return;
+  }
+
+  dom.bookingsBody.innerHTML = visibleBookings
     .map(
       (booking) => `
         <tr>
           <td>${esc(booking.spot_name)} · ${esc(booking.building)}</td>
           <td>${formatDateTime(booking.start_at)}</td>
           <td>${formatDateTime(booking.end_at)}</td>
-          <td>${stateLabel(booking)}</td>
+          <td><span class="status-pill status-${esc(booking.state)}">${stateLabel(booking)}</span></td>
         </tr>
       `,
     )
@@ -892,6 +957,17 @@ async function onLogout() {
   }
 }
 
+function syncGlobalSearch(value) {
+  state.searchQuery = value || "";
+  [dom.globalSearch, dom.sidebarGlobalSearch].forEach((input) => {
+    if (input && input.value !== state.searchQuery) {
+      input.value = state.searchQuery;
+    }
+  });
+  renderSpots();
+  renderBookings();
+}
+
 function activateTab(tabId) {
   dom.tabPanels.forEach((panel) => {
     const isActive = panel.id === tabId;
@@ -1023,6 +1099,10 @@ function bindEvents() {
   }
   if (dom.themeSelect)
     dom.themeSelect.addEventListener("change", onThemeChange);
+  [dom.globalSearch, dom.sidebarGlobalSearch].forEach((input) => {
+    if (!input) return;
+    input.addEventListener("input", () => syncGlobalSearch(input.value));
+  });
   if (dom.rulesAcceptBtn)
     dom.rulesAcceptBtn.addEventListener("click", acceptRules);
 
